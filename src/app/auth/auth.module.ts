@@ -9,7 +9,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { RouterModule } from "@angular/router";
 import { LoginComponent } from "./login/login.component";
-import * as fromAuth from './reducers';
+import * as fromAuth from "./reducers";
 
 @NgModule({
   imports: [
@@ -19,7 +19,9 @@ import * as fromAuth from './reducers';
     MatInputModule,
     MatButtonModule,
     RouterModule.forChild([{ path: "", component: LoginComponent }]),
-    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers, { metaReducers: fromAuth.metaReducers }),
+    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer, {
+      metaReducers: fromAuth.metaReducers,
+    }),
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent],
