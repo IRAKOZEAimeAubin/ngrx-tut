@@ -10,6 +10,8 @@ import { MatInputModule } from "@angular/material/input";
 import { RouterModule } from "@angular/router";
 import { LoginComponent } from "./login/login.component";
 import * as fromAuth from "./reducers";
+import { AuthGuard } from "./auth.guard";
+import { AuthEffects } from "./auth.effects";
 
 @NgModule({
   imports: [
@@ -22,6 +24,7 @@ import * as fromAuth from "./reducers";
     StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer, {
       metaReducers: fromAuth.metaReducers,
     }),
+    EffectsModule.forFeature([AuthEffects]),
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent],
@@ -30,7 +33,7 @@ export class AuthModule {
   static forRoot(): ModuleWithProviders<AuthModule> {
     return {
       ngModule: AuthModule,
-      providers: [AuthService],
+      providers: [AuthService, AuthGuard],
     };
   }
 }
